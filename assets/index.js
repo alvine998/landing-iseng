@@ -5,7 +5,7 @@ import img4 from './images/img4.png'
 import plane from './images/plane.png'
 import sky from './images/sky.png'
 import yellow_tourist from './images/yellow_tourist.png'
-
+import pinmapIcon from './icons/pinmap.png'
 export {
     img1,
     img2,
@@ -13,5 +13,6 @@ export {
     img4,
     plane,
     sky,
-    yellow_tourist
+    yellow_tourist,
+    pinmapIcon
 }

@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import ChevronDownIcon from '@heroicons/react/24/solid/ChevronDownIcon'
 import MapPinIcon from '@heroicons/react/24/solid/MapPinIcon'
+import { pinmapIcon } from '@/assets'
+import Image from 'next/image'
 
 export default function Navbar() {
     const [dropdown, setDropdown] = useState(false)
+    const [dropdown2, setDropdown2] = useState(false)
     return (
         <div>
             <nav>
@@ -11,15 +14,28 @@ export default function Navbar() {
                     <div className='flex flex-row justify-between items-center md:px-3'>
                         <div className='flex flex-row gap-1'>
                             <h3 className='text-xl font-bold'>Firorial</h3>
-                            <MapPinIcon className='w-5 text-blue-500'/>
+                            <Image src={pinmapIcon} alt="pin" className='w-5 h-5' />
                         </div>
-                        <div className='flex flex-row gap-5'>
+                        <div className='flex flex-row gap-10'>
                             <a className='text-gray-700 hover:text-gray-800' href='#'>About</a>
-                            <a href='#' onClick={() => { setDropdown(!dropdown) }} className='flex flex-row items-center gap-1'>
+                            <a href='#' onMouseOver={() => {
+                                setDropdown(!dropdown)
+                                setDropdown2(false)
+                            }} className='flex flex-row items-center gap-1'>
                                 <p>Service</p>
-                                <ChevronDownIcon className={"w-5 text-blue-500"} />
+                                <ChevronDownIcon className={`w-5 text-blue-500 ${dropdown ? 'rotate-180 transition duration-300' : ''}`} />
                             </a>
-                            <a className='text-gray-700 hover:text-gray-800' href='#'>Pricing</a>
+                            <div className={`bg-white h-auto shadow-lg md:p-2 md:w-56 transition duration-300 ease-in-out z-10 ${dropdown ? 'block' : 'hidden'}`}>
+                                <a className='text-gray-700 hover:text-gray-800' href='#'>About</a>
+                                <a className='text-gray-700 hover:text-gray-800' href='#'>About</a>
+                            </div>
+                            <a href='#' onMouseOver={() => {
+                                setDropdown(false)
+                                setDropdown2(!dropdown2)
+                            }} className='flex flex-row items-center gap-1'>
+                                <p>Pricing</p>
+                                <ChevronDownIcon className={`w-5 text-blue-500 ${dropdown2 ? 'rotate-180 transition duration-300' : ''}`} />
+                            </a>
                             <a className='text-gray-700 hover:text-gray-800' href='#'>Contact</a>
                         </div>
                         <div className='flex flex-row gap-5 items-center justify-center'>
@@ -33,9 +49,10 @@ export default function Navbar() {
                     </div>
                 </div>
             </nav>
+
             {
-                dropdown ?
-                    <div className='bg-white h-auto shadow-lg md:p-2 w-auto transition duration-300 ease-in-out'>
+                dropdown2 ?
+                    <div className='bg-white h-auto shadow-lg md:p-2 md:w-56 transition duration-300 ease-in-out z-10'>
                         <a className='text-gray-700 hover:text-gray-800' href='#'>About</a>
                         <a className='text-gray-700 hover:text-gray-800' href='#'>About</a>
                     </div> : ""
